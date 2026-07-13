@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-tvm_vm = { git = "https://github.com/tvmlabs/tvm-sdk.git", branch = "feature/cache-poseidon-spec", features = ["gosh"] }
+tvm_vm = { git = "https://github.com/tvmlabs/tvm-sdk.git", branch = "main", features = ["gosh"] }
 hex = "0.4"
 monotree = "0.4.0"
 
