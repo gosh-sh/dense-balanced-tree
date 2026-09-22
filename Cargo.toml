@@ -4,9 +4,25 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-tvm_vm = { git = "https://github.com/tvmlabs/tvm-sdk.git", branch = "main", features = ["gosh"] }
+tvm_vm = { git = "https://github.com/tvmlabs/tvm-sdk.git", tag = "v3.0.6.an", features = ["gosh"] }
 hex = "0.4"
 monotree = "0.4.0"
 
 [dev-dependencies]
 rand = "0.8"
+
+# Mirror tvm-sdk's workspace [patch] tables so this standalone crate resolves
+# halo2-axiom / halo2-base / halo2-ecc / zkevm-hashes / axiom-eth to the gosh-sh
+# forks that build on stable Rust. Without these patches cargo picks the
+# crates.io halo2-axiom, which uses nightly-only `#![feature(...)]`.
+[patch.crates-io]
+halo2-base = { git = "https://github.com/gosh-sh/halo2-lib-zkevm-sha256-and-bls12-381", branch = "bump-halo2-lib-v0.4.1" }
+halo2-axiom = { git = "https://github.com/gosh-sh/halo2-axiom", branch = "main" }
+
+[patch."https://github.com/axiom-crypto/halo2-lib.git"]
+halo2-base = { git = "https://github.com/gosh-sh/halo2-lib-zkevm-sha256-and-bls12-381", branch = "bump-halo2-lib-v0.4.1" }
+halo2-ecc = { git = "https://github.com/gosh-sh/halo2-lib-zkevm-sha256-and-bls12-381", branch = "bump-halo2-lib-v0.4.1" }
+zkevm-hashes = { git = "https://github.com/gosh-sh/halo2-lib-zkevm-sha256-and-bls12-381", branch = "bump-halo2-lib-v0.4.1" }
+
+[patch."https://github.com/axiom-crypto/axiom-eth"]
+axiom-eth = { git = "https://github.com/gosh-sh/axiom-eth", rev = "1d61be00a63ec73b3f709d74eb9e6b09b754b911" }
