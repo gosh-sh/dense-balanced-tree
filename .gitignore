@@ -1,1 +1,14 @@
+# Claude Code local files
+.claude/
+
 /target
+
+.vscode
+.idea
+target
+target-bootstrap
+target-codex
+target-local
+data
+Cargo.lock
+.DS_Store
